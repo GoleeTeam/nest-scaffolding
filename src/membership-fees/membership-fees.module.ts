@@ -1,5 +1,4 @@
 import { MembershipFeesAggregateRepo } from './infrastructure/membership-fees-aggregate.repo';
-
 import { MemberFeesRepoHooks } from './infrastructure/member-fees.repo-hooks';
 import { MemberFeesQueries } from './member-fees-queries.service';
 import { getConnectionToken } from '@nestjs/mongoose';

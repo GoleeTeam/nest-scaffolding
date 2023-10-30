@@ -36,8 +36,11 @@ describe('Member Registration Component Test', () => {
 
         module = await Test.createTestingModule({
             providers: memberRegistrationProviders,
-            imports: [MongooseModule.forRoot(mongodb.getUri('test'))],
-        }).compile();
+            imports: [MongooseModule],
+        })
+            .overrideModule(MongooseModule)
+            .useModule(MongooseModule.forRoot(mongodb.getUri('test')))
+            .compile();
 
         commands = module.get<MemberRegistrationCommands>(MemberRegistrationCommands);
         aggregateRepo = module.get<MongoAggregateRepo<MemberRegistrationAggregate, MemberRegistrationAggregateModel>>(
