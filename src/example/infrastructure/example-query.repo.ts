@@ -1,6 +1,7 @@
 import { AnyBulkWriteOperation, BulkWriteOptions, Document, Filter, FindOptions } from 'mongodb';
 import { Injectable } from '@nestjs/common';
 import { MongoQueryRepo } from '../../common/infrastructure/mongo-query-repo';
+import { Connection } from 'mongoose';
 
 export interface ExampleQueryModel {
     id: string;
@@ -24,5 +25,9 @@ export class ExampleQueryRepo extends MongoQueryRepo<ExampleQueryModel & Documen
         options?: BulkWriteOptions,
     ) {
         return await this.collection.bulkWrite(operations, options);
+    }
+
+    public static providerFactory(conn: Connection) {
+        return new ExampleQueryRepo(conn.getClient(), 'example_read_model');
     }
 }

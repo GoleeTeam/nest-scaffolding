@@ -1,4 +1,4 @@
-import { ExampleAggregateModel } from './example-aggregate.model';
+import { ExampleAggregateModel } from './example-aggregate.repo';
 import { ExampleAggregateRoot } from '../domain';
 import { ISerializer } from '../../common';
 import { ExampleId } from '../domain/example-id';

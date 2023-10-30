@@ -1,11 +1,11 @@
-import { exampleMongoWriteRepoToken } from './example.module';
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { ExampleAggregateRoot } from './domain';
 import { GenericId, IAggregateRepo } from '../common';
+import { ExampleAggregateRepo } from './infrastructure';
 
 @Injectable()
 export class ExampleCommands {
-    constructor(@Inject(exampleMongoWriteRepoToken) private readonly repo: IAggregateRepo<ExampleAggregateRoot>) {}
+    constructor(@Inject(ExampleAggregateRepo) private readonly repo: IAggregateRepo<ExampleAggregateRoot>) {}
 
     public async createCmd() {
         const exampleAggregateRoot = ExampleAggregateRoot.createEmpty();

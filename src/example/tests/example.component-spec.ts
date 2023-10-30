@@ -1,14 +1,13 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { MongoMemoryReplSet } from 'mongodb-memory-server';
-import { getConnectionToken, MongooseModule } from '@nestjs/mongoose';
+import { MongooseModule } from '@nestjs/mongoose';
 import { ExampleAggregateRoot } from '../domain';
 import { GenericId, MongoAggregateRepo } from '../../common';
-import { ExampleAggregateModel, ExampleMongoSerializer, ExampleQueryRepo, ExampleRepoHooks } from '../infrastructure';
+import { ExampleAggregateModel, ExampleAggregateRepo } from '../infrastructure';
 import { ExampleCommands } from '../example.commands';
 import { ExampleQueries } from '../example.queries';
-import { exampleMongoWriteRepoToken } from '../example.module';
+import { exampleModuleProviders } from '../example.module';
 import { ExampleId } from '../domain/example-id';
-import { Connection } from 'mongoose';
 
 describe('Example Component Test', () => {
     let module: TestingModule;
@@ -27,37 +26,14 @@ describe('Example Component Test', () => {
         });
 
         module = await Test.createTestingModule({
-            providers: [
-                {
-                    provide: exampleMongoWriteRepoToken,
-                    useFactory: (mongoConn: Connection, exampleRepoHooks: ExampleRepoHooks) => {
-                        return new MongoAggregateRepo<ExampleAggregateRoot, ExampleAggregateModel>(
-                            new ExampleMongoSerializer(),
-                            mongoConn.getClient(),
-                            'example_write_model',
-                            exampleRepoHooks,
-                        );
-                    },
-                    inject: [getConnectionToken(), ExampleRepoHooks],
-                },
-                ExampleCommands,
-                ExampleRepoHooks,
-                {
-                    provide: ExampleQueryRepo,
-                    inject: [getConnectionToken()],
-                    useFactory: (conn: Connection) => {
-                        return new ExampleQueryRepo(conn.getClient(), 'example_read_model');
-                    },
-                },
-                ExampleQueries,
-            ],
+            providers: exampleModuleProviders,
             imports: [MongooseModule.forRoot(mongodb.getUri('test'))],
         }).compile();
 
         commands = module.get<ExampleCommands>(ExampleCommands);
         queries = module.get<ExampleQueries>(ExampleQueries);
         aggregateRepo =
-            module.get<MongoAggregateRepo<ExampleAggregateRoot, ExampleAggregateModel>>(exampleMongoWriteRepoToken);
+            module.get<MongoAggregateRepo<ExampleAggregateRoot, ExampleAggregateModel>>(ExampleAggregateRepo);
         await aggregateRepo.onModuleInit();
     });
 
