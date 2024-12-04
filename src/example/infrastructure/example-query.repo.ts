@@ -1,8 +1,7 @@
-import { AnyBulkWriteOperation, BulkWriteOptions, Document, Filter, FindOptions } from 'mongodb';
-import { Inject, Injectable } from '@nestjs/common';
+import { AnyBulkWriteOperation, BulkWriteOptions, Document, Filter, FindOptions, MongoClient } from 'mongodb';
+import { Injectable } from '@nestjs/common';
 import { MongoQueryRepo } from '../../common/infrastructure/mongo-query-repo';
-import { Connection } from 'mongoose';
-import { getConnectionToken } from '@nestjs/mongoose';
+import { InjectMongo } from '@golee/mongo-nest';
 
 export interface ExampleQueryModel {
     id: string;
@@ -13,8 +12,8 @@ export interface ExampleQueryModel {
 export class ExampleQueryRepo extends MongoQueryRepo<ExampleQueryModel & Document> {
     protected readonly indexes = [{ indexSpec: { name: 1 } }];
 
-    constructor(@Inject(getConnectionToken()) connection: Connection) {
-        super(connection.getClient(), 'example_read_model');
+    constructor(@InjectMongo() mongoClient: MongoClient) {
+        super(mongoClient, 'example_read_model');
     }
 
     public async getMany() {

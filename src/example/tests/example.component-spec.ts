@@ -1,6 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { MongoMemoryReplSet } from 'mongodb-memory-server';
-import { MongooseModule } from '@nestjs/mongoose';
 import { ExampleAggregateRoot } from '../domain';
 import { GenericId, MongoAggregateRepo } from '../../common';
 import { ExampleAggregateModel, ExampleAggregateRepo } from '../infrastructure';
@@ -8,6 +7,7 @@ import { ExampleCommands } from '../example.commands';
 import { ExampleQueries } from '../example.queries';
 import { exampleModuleProviders } from '../example.module';
 import { ExampleId } from '../domain/example-id';
+import { MongoModule } from '@golee/mongo-nest';
 
 describe('Example Component Test', () => {
     let module: TestingModule;
@@ -27,7 +27,7 @@ describe('Example Component Test', () => {
 
         module = await Test.createTestingModule({
             providers: exampleModuleProviders,
-            imports: [MongooseModule.forRoot(mongodb.getUri('test'))],
+            imports: [MongoModule.forRoot({ uri: mongodb.getUri('test') })],
         }).compile();
 
         commands = module.get<ExampleCommands>(ExampleCommands);

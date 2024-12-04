@@ -3,9 +3,9 @@ import { AppController } from './app.controller';
 import { LoggerModule } from 'nestjs-pino';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { envValidationSchema } from './env-validation-schema';
-import { MongooseModule } from '@nestjs/mongoose';
 import { ExampleModule } from './example/example.module';
 import { RequestId } from './common';
+import { MongoModule } from '@golee/mongo-nest';
 
 @Module({
     imports: [
@@ -26,7 +26,7 @@ import { RequestId } from './common';
                 };
             },
         }),
-        MongooseModule.forRootAsync({
+        MongoModule.forRootAsync({
             inject: [ConfigService],
             useFactory: (config: ConfigService) => ({
                 uri: config.getOrThrow('MONGODB_URI'),

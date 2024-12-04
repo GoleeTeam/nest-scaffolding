@@ -1,12 +1,16 @@
-import { Controller, Get, Req } from '@nestjs/common';
+import { Controller, Get, HttpException, Req } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { Connection, STATES } from 'mongoose';
-import { InjectConnection } from '@nestjs/mongoose';
+
 import { Request } from 'express';
+import { MongoClient } from 'mongodb';
+import { InjectMongo } from '@golee/mongo-nest';
 
 @Controller()
 export class AppController {
-    constructor(private readonly config: ConfigService, @InjectConnection() private readonly connection: Connection) {}
+    constructor(
+        private readonly config: ConfigService,
+        @InjectMongo() private readonly client: MongoClient,
+    ) {}
 
     @Get()
     getHello(@Req() req: Request) {
@@ -14,7 +18,22 @@ export class AppController {
     }
 
     @Get('/health')
-    health() {
-        return { mongoConnectionStatus: STATES[this.connection.readyState] };
+    async health() {
+        if (await this.mongoIsConnected()) {
+            return 'ok';
+        } else {
+            throw new HttpException('MongoDB is not connected', 503);
+        }
+    }
+
+    private mongoIsConnected(): Promise<boolean> {
+        return new Promise((resolve) => {
+            this.client
+                .db()
+                .admin()
+                .ping()
+                .then(() => resolve(true))
+                .catch(() => resolve(false));
+        });
     }
 }

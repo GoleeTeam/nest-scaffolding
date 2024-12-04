@@ -1,10 +1,9 @@
 import { MongoAggregateRepo } from '../../common';
 import { ExampleAggregateRoot } from '../domain';
 import { ExampleMongoSerializer } from './example.serializer';
-import { Connection } from 'mongoose';
 import { ExampleRepoHooks } from './example.repo-hooks';
-import { Inject } from '@nestjs/common';
-import { getConnectionToken } from '@nestjs/mongoose';
+import { MongoClient } from 'mongodb';
+import { InjectMongo } from '@golee/mongo-nest';
 
 export interface ExampleAggregateModel {
     id: string;
@@ -12,7 +11,7 @@ export interface ExampleAggregateModel {
 }
 
 export class ExampleAggregateRepo extends MongoAggregateRepo<ExampleAggregateRoot, ExampleAggregateModel> {
-    constructor(@Inject(getConnectionToken()) conn: Connection, exampleRepoHooks: ExampleRepoHooks) {
-        super(new ExampleMongoSerializer(), conn.getClient(), 'example_write_model', exampleRepoHooks);
+    constructor(@InjectMongo() mongoClient: MongoClient, exampleRepoHooks: ExampleRepoHooks) {
+        super(new ExampleMongoSerializer(), mongoClient, 'example_write_model', exampleRepoHooks);
     }
 }
