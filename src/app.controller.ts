@@ -1,9 +1,8 @@
+import { InjectMongo } from '@golee/mongo-nest';
 import { Controller, Get, HttpException, Req } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-
 import { Request } from 'express';
 import { MongoClient } from 'mongodb';
-import { InjectMongo } from '@golee/mongo-nest';
 
 @Controller()
 export class AppController {

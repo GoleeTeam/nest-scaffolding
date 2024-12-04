@@ -1,6 +1,6 @@
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
-import { ExampleAggregateRoot } from './domain';
 import { GenericId, IAggregateRepo } from '../common';
+import { ExampleAggregateRoot } from './domain';
 import { ExampleAggregateRepo } from './infrastructure';
 
 @Injectable()

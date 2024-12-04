@@ -1,10 +1,10 @@
-import { IRepoHooks } from './repo-hooks';
-import { Collection, Document, MongoClient } from 'mongodb';
 import { OnModuleInit } from '@nestjs/common';
-import { GenericId } from './generic-id';
-import { ISerializer } from './serializer.interface';
 import { merge } from 'lodash';
+import { Collection, Document, MongoClient } from 'mongodb';
 import { DuplicatedIdError, OptimisticLockError, RepoHookError } from './errors';
+import { GenericId } from './generic-id';
+import { IRepoHooks } from './repo-hooks';
+import { ISerializer } from './serializer.interface';
 
 export interface IAggregateRepo<A> {
     getById: (id: GenericId) => Promise<WithVersion<A> | null>;

@@ -1,8 +1,8 @@
 import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
-import { ExampleCommands } from '../example.commands';
-import { AddNameDto } from './dto/add-name.dto';
-import { ExampleQueries } from '../example.queries';
 import { ExampleId } from '../domain/example-id';
+import { ExampleCommands } from '../example.commands';
+import { ExampleQueries } from '../example.queries';
+import { AddNameDto } from './dto/add-name.dto';
 
 @Controller('example')
 export class ExampleController {

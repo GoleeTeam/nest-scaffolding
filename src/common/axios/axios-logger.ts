@@ -1,5 +1,5 @@
-import { AxiosError, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
 import { Logger } from '@nestjs/common';
+import { AxiosError, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
 
 const axiosLogger = new Logger('Axios');
 

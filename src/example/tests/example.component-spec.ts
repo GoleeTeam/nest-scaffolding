@@ -1,13 +1,13 @@
+import { MongoModule } from '@golee/mongo-nest';
 import { Test, TestingModule } from '@nestjs/testing';
 import { MongoMemoryReplSet } from 'mongodb-memory-server';
-import { ExampleAggregateRoot } from '../domain';
 import { GenericId, MongoAggregateRepo } from '../../common';
-import { ExampleAggregateModel, ExampleAggregateRepo } from '../infrastructure';
-import { ExampleCommands } from '../example.commands';
-import { ExampleQueries } from '../example.queries';
-import { exampleModuleProviders } from '../example.module';
+import { ExampleAggregateRoot } from '../domain';
 import { ExampleId } from '../domain/example-id';
-import { MongoModule } from '@golee/mongo-nest';
+import { ExampleCommands } from '../example.commands';
+import { exampleModuleProviders } from '../example.module';
+import { ExampleQueries } from '../example.queries';
+import { ExampleAggregateModel, ExampleAggregateRepo } from '../infrastructure';
 
 describe('Example Component Test', () => {
     let module: TestingModule;

@@ -1,11 +1,11 @@
+import { MongoModule } from '@golee/mongo-nest';
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { LoggerModule } from 'nestjs-pino';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { LoggerModule } from 'nestjs-pino';
+import { AppController } from './app.controller';
+import { RequestId } from './common';
 import { envValidationSchema } from './env-validation-schema';
 import { ExampleModule } from './example/example.module';
-import { RequestId } from './common';
-import { MongoModule } from '@golee/mongo-nest';
 
 @Module({
     imports: [

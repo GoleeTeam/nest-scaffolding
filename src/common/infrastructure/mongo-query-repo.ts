@@ -1,6 +1,6 @@
-import { Collection, CreateIndexesOptions, Document, IndexDirection, IndexSpecification, MongoClient } from 'mongodb';
 import { Injectable, Logger, OnModuleInit } from '@nestjs/common';
 import { isEmpty } from 'lodash';
+import { Collection, CreateIndexesOptions, Document, IndexDirection, IndexSpecification, MongoClient } from 'mongodb';
 
 type IndexType<T> = {
     [key in keyof T]?: IndexDirection;

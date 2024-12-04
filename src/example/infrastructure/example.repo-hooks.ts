@@ -1,6 +1,6 @@
+import { Injectable } from '@nestjs/common';
 import { IRepoHooks } from '../../common';
 import { ExampleAggregateRoot } from '../domain';
-import { Injectable } from '@nestjs/common';
 import { ExampleQueryModel, ExampleQueryRepo } from './example-query.repo';
 
 @Injectable()

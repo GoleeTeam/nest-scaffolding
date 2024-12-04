@@ -1,7 +1,7 @@
-import { AnyBulkWriteOperation, BulkWriteOptions, Document, Filter, FindOptions, MongoClient } from 'mongodb';
-import { Injectable } from '@nestjs/common';
-import { MongoQueryRepo } from '../../common/infrastructure/mongo-query-repo';
 import { InjectMongo } from '@golee/mongo-nest';
+import { Injectable } from '@nestjs/common';
+import { AnyBulkWriteOperation, BulkWriteOptions, Document, Filter, FindOptions, MongoClient } from 'mongodb';
+import { MongoQueryRepo } from '../../common/infrastructure/mongo-query-repo';
 
 export interface ExampleQueryModel {
     id: string;

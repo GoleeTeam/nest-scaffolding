@@ -1,5 +1,5 @@
-import AxiosClientFactory from './axios-client.factory';
 import MockAdapter from 'axios-mock-adapter';
+import AxiosClientFactory from './axios-client.factory';
 
 describe('AxiosClientFactory', () => {
     const axiosClient = AxiosClientFactory.create('https://api.com');

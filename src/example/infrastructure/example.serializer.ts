@@ -1,7 +1,7 @@
-import { ExampleAggregateModel } from './example-aggregate.repo';
-import { ExampleAggregateRoot } from '../domain';
 import { ISerializer } from '../../common';
+import { ExampleAggregateRoot } from '../domain';
 import { ExampleId } from '../domain/example-id';
+import { ExampleAggregateModel } from './example-aggregate.repo';
 
 export class ExampleMongoSerializer implements ISerializer<ExampleAggregateRoot, ExampleAggregateModel> {
     public aggregateToAggregateModel(aggregate: ExampleAggregateRoot): ExampleAggregateModel {

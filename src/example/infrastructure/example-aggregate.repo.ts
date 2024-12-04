@@ -1,9 +1,9 @@
+import { InjectMongo } from '@golee/mongo-nest';
+import { MongoClient } from 'mongodb';
 import { MongoAggregateRepo } from '../../common';
 import { ExampleAggregateRoot } from '../domain';
-import { ExampleMongoSerializer } from './example.serializer';
 import { ExampleRepoHooks } from './example.repo-hooks';
-import { MongoClient } from 'mongodb';
-import { InjectMongo } from '@golee/mongo-nest';
+import { ExampleMongoSerializer } from './example.serializer';
 
 export interface ExampleAggregateModel {
     id: string;
