@@ -1,7 +1,10 @@
 import { ExampleId } from './example-id';
 
 export class ExampleAggregateRoot {
-    constructor(private id: ExampleId, private name?: string) {}
+    constructor(
+        private id: ExampleId,
+        private name?: string,
+    ) {}
 
     static createEmpty() {
         const id = ExampleId.generate();

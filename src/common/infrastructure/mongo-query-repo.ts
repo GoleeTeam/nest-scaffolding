@@ -12,7 +12,10 @@ export abstract class MongoQueryRepo<RM extends Document> implements OnModuleIni
     protected readonly collection: Collection<RM>;
     protected abstract readonly indexes: { indexSpec: IndexType<RM>; options?: CreateIndexesOptions }[];
 
-    constructor(mongoClient: MongoClient, private readonly collectionName: string) {
+    constructor(
+        mongoClient: MongoClient,
+        private readonly collectionName: string,
+    ) {
         // TODO wrap collection with a proxy to log all queries
         this.collection = mongoClient.db().collection(this.collectionName);
     }

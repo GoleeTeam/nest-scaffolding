@@ -6,7 +6,10 @@ import { ExampleId } from '../domain/example-id';
 
 @Controller('example')
 export class ExampleController {
-    constructor(private readonly exampleCommands: ExampleCommands, private readonly exampleQueries: ExampleQueries) {}
+    constructor(
+        private readonly exampleCommands: ExampleCommands,
+        private readonly exampleQueries: ExampleQueries,
+    ) {}
 
     @Post('')
     public async create() {
