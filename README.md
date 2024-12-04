@@ -4,7 +4,16 @@
 $ pnpm install
 ```
 
+## MongoDB in memory
+
+```bash
+$ pnpm exec ts-node mongo-memory-repl-set.ts
+``` 
+
 ## Running the app
+
+Make sure MongoDB is up and running.
+
 
 ```bash
 # development
